@@ -2,32 +2,42 @@
     <x-slot:heading>
         Create Job
     </x-slot:heading>
-    <h3>Create a New Job</h3>
-    <p>We just need a handful of details from you</p>
 
-       <div class="w-full max-w-xs">
-  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col" action="/jobs" method="POST">
-    @csrf
-    <div class="mb-4">
-      <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
-        Title
-      </label>
-      <input name="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="">
-      @error('title')
-        <p class='text-xs text-red-500 font-semibold mt-2'>{{ $message }}</p>
-      @enderror
-    </div>
-    <div class="mb-6">
-      <label  class="block text-gray-700 text-sm font-bold mb-2" for="salary">
-        Salary
-      </label>
-      <input name="salary" class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="text" placeholder="">
-         @error('salary')
-        <p class='text-xs text-red-500 font-semibold mt-2'>{{ $message }}</p>
-      @enderror
-    </div>
-    <button class="bg-blue-400 p-2">Submit</button>
-  </form>
-</div>
+    <form method="POST" action="/jobs">
+        @csrf
 
+        <div class="space-y-12">
+            <div class="border-b border-gray-900/10 pb-12">
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Create a New Job</h2>
+                <p class="mt-1 text-sm leading-6 text-gray-600">We just need a handful of details from you.</p>
+
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <x-form-field>
+                        <x-form-label for="title">Title</x-form-label>
+
+                        <div class="mt-2">
+                            <x-form-input name="title" id="title" placeholder="CEO" />
+
+                            <x-form-error name="title" />
+                        </div>
+                    </x-form-field>
+
+                    <x-form-field>
+                        <x-form-label for="salary">Salary</x-form-label>
+
+                        <div class="mt-2">
+                            <x-form-input name="salary" id="salary" placeholder="$50,000 USD" />
+
+                            <x-form-error name="salary" />
+                        </div>
+                    </x-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+            <x-form-button>Save</x-form-button>
+        </div>
+    </form>
 </x-layout>
